@@ -17,6 +17,15 @@ export default function RootLayout({ children }) {
     <html lang="en-NZ">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        
+      <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18414763247"></script>
+      <script>
+      {`window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-18414763247');`}
+      </script>
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
