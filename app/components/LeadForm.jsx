@@ -68,6 +68,7 @@ export default function LeadForm({
       const res = await r.json().catch(() => ({ ok: false }));
       if (res && res.ok) {
         window.location.href = THANK_YOU_URL;
+        form.reset();
         return;
       }
       setSubmitting(false);
