@@ -192,8 +192,7 @@ function buildLeadHtml({ name, mobile, email, income, deposit, submittedAt, sour
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 ${metaRow('Form',    e(source))}
                 ${metaRow('Page',    pageUrl ? `<a href="${e(pageUrl)}" style="color:#475569;text-decoration:underline">${e(pageUrl)}</a>` : '&mdash;')}
-                ${metaRow('IP',      e(ip))}
-                ${metaRow('Browser', e(userAgent))}
+                
               </table>
             </td>
           </tr>
