@@ -2,19 +2,19 @@ import { AvatarIcon, Stars } from './icons';
 
 const QUOTES = [
   {
-    text: '“Go talk to the guys at Fundmaster because they will set you up with goals that will achieve your end result, which is buying a house.”',
+    text: '“Go talk to the guys atFundmaster because they will set you up with goals that will achieve your end result, which is buying a house.”',
     name: 'First Home Buyers',
     location: 'Auckland',
     language: 'English',
   },
   {
-    text: '“Other brokers declined me. I saw a Fundmaster ad on Facebook and reached out. They worked really hard on my mortgage and got it sorted.”',
+    text: '“Other brokers declined me. I saw aFundmaster ad on Facebook and reached out. They worked really hard on my mortgage and got it sorted.”',
     name: 'Fundmaster Client',
     location: 'Auckland',
     language: 'Punjabi',
   },
   {
-    text: '“My application was one of the toughest, but Rochelle, Dave and the team stood by us and got us into our first home. Highly recommend Fundmaster.”',
+    text: '“My application was one of the toughest, but Rochelle, Dave and the team stood by us and got us into our first home. Highly recommendFundmaster.”',
     name: 'Vineet',
     location: 'Auckland',
     language: 'English',
@@ -36,7 +36,7 @@ export default function Testimonials() {
           <p className="eyebrow">Real journeys</p>
           <h2>They started where you are.</h2>
           <p className="sub">Real people. Real first homes. Real journeys.</p>
-          <p className="lede">You don't need to have everything figured out before you begin. Hear from first-home buyers who worked with FundMaster Wealth to move from uncertainty to owning their home.</p>
+          <p className="lede">You don't need to have everything figured out before you begin. Hear from first-home buyers who worked withFundmaster Wealth to move from uncertainty to owning their home.</p>
         </div>
 
         <div className="tstm">

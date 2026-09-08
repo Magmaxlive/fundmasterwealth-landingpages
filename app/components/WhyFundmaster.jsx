@@ -42,7 +42,7 @@ export default function WhyFundmaster() {
     <section className="section">
       <div className="wrap">
         <div className="center rv" style={{ maxWidth: '800px', margin: '0 auto 48px' }}>
-          <p className="eyebrow">Why FundMaster Wealth</p>
+          <p className="eyebrow">WhyFundmaster Wealth</p>
           <h2>Get advice before you sign anything.</h2>
           <p className="sub">Your first home deserves a well-thought-out plan.</p>
           <p className="lede">Buying your first home is a major financial decision. Having the right advice early can help you approach it with greater clarity and confidence.</p>

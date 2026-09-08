@@ -15,7 +15,7 @@ export default function SiteFooter() {
           Calculator results are indicative only and do not constitute financial advice or lending approval. Eligibility criteria, lending requirements and government schemes can change. Your adviser can help you understand what may apply to your circumstances. A Disclosure Statement is available on request and free of charge.
         </p>
         <div className="ftr__base">
-          <span>© {new Date().getFullYear()} FundMaster Wealth. All rights reserved.</span>
+          <span>© {new Date().getFullYear()}Fundmaster Wealth. All rights reserved.</span>
           <span><a href="https://www.fundmasterwealth.co.nz" target="_blank" rel="noopener">fundmasterwealth.co.nz</a></span>
         </div>
       </div>

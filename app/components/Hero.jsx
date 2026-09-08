@@ -19,8 +19,8 @@ export default function Hero() {
       <div className="wrap hero__grid">
         <div className="rv">
           <p className="eyebrow">First Home Buyers · New Zealand</p>
-          <h1>Not sure if you're ready to buy your <span className="grad-text">first home?</span></h1>
-          <p className="hero__sub">Find out what you could afford, your options, and your next step.</p>
+          <h1>Your First Home Starts With The <span className="grad-text">Right Mortgage</span></h1>
+          {/* <p className="hero__sub">Find out what you could afford, your options, and your next step.</p> */}
           <p className="hero__body">Get clarity on your borrowing, deposit and home-buying options before you start house hunting.</p>
 
           <p className="includes__title">Your free first home buyer check includes</p>

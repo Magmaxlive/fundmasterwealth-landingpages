@@ -62,8 +62,8 @@ export default function BorrowingPowerCalculator() {
           <div style={{ marginTop: '34px', padding: '26px 28px', borderRadius: '18px', background: 'rgba(255,255,255,.05)', border: '1px solid rgba(255,255,255,.12)' }}>
             <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Want to know what you could realistically buy?</h3>
             <p style={{ margin: '0 0 8px', fontSize: '15px', color: 'rgba(232,240,248,.75)' }}>A borrowing calculator can give you a starting point. A personalised assessment can give you a clearer picture of what may actually be possible.</p>
-            <p style={{ margin: '0 0 20px', fontSize: '15px', color: 'rgba(232,240,248,.75)' }}>Speak with a FundMaster Wealth adviser about your circumstances.</p>
-            <a className="btn btn--ghost" href="#check">Speak to a FundMaster Wealth Adviser</a>
+            <p style={{ margin: '0 0 20px', fontSize: '15px', color: 'rgba(232,240,248,.75)' }}>Speak with aFundmaster Wealth adviser about your circumstances.</p>
+            <a className="btn btn--ghost" href="#check">Speak to aFundmaster Wealth Adviser</a>
           </div>
         </div>
 

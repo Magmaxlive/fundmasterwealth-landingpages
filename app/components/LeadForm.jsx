@@ -15,7 +15,7 @@ export default function LeadForm({
   source,
   id,
   head = 'Get your free check',
-  note = 'Takes under a minute. A FundMaster Wealth adviser will be in touch.',
+  note = 'Takes under a minute. AFundmaster Wealth adviser will be in touch.',
   variant,
 }) {
   const formRef = useRef(null);
