@@ -72,7 +72,7 @@ export default function DepositPathways({
       <div className="wrap">
         <div className="center rv" style={{ maxWidth: '840px', margin: '0 auto 52px' }}>
           {eyebrow ? <p className="eyebrow" style={{ color: 'var(--teal)' }}>{eyebrow}</p> : null}
-          {heading ? <h2 style={{ color: '#fff' }}>{heading}</h2> : null}
+          {heading ? <h2 className="capitalize" style={{ color: '#fff' }}>{heading}</h2> : null}
           {sub ? <p className="sub" style={{ color: 'var(--teal)' }}>{sub}</p> : null}
           {lede ? <p className="lede" style={{ color: 'rgba(232,240,248,.78)' }}>{lede}</p> : null}
         </div>
@@ -81,7 +81,7 @@ export default function DepositPathways({
           {paths.map((p) => (
             <div className="path rv" key={p.title}>
               <div className="path__ico"><svg viewBox="0 0 24 24">{p.svg}</svg></div>
-              <h3>{p.title}</h3>
+              <h3 className="capitalize">{p.title}</h3>
               <p>{p.text}</p>
             </div>
           ))}
