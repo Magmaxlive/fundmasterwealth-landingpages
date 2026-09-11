@@ -62,8 +62,8 @@ export default function ClarityCards({
       <div className="wrap">
         <div className="center rv" style={{ maxWidth: '820px', margin: '0 auto 56px' }}>
           {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-          {heading ? <h2>{heading}</h2> : null}
-          {sub ? <p className="sub">{sub}</p> : null}
+          {heading ? <h2 className="capitalize">{heading}</h2> : null}
+          {sub ? <p className="sub text-xs">{sub}</p> : null}
           {lede ? <p className="lede">{lede}</p> : null}
         </div>
 
@@ -72,7 +72,7 @@ export default function ClarityCards({
             <div className="card rv" key={c.num || c.title}>
               <div className="card__ico"><svg viewBox="0 0 24 24">{c.svg}</svg></div>
               {c.num ? <span className="card__num">{c.num}</span> : null}
-              <h3>{c.title}</h3>
+              <h3 className="capitalize">{c.title}</h3>
               <p>{c.text}</p>
             </div>
           ))}
