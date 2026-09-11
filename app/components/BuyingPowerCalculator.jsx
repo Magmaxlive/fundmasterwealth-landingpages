@@ -3,7 +3,24 @@
 import { useRef, useState } from 'react';
 import { depositPosition, estimate, formatMoneyInput, money, parseAmount } from './calcModel';
 
-export default function BuyingPowerCalculator() {
+export default function BuyingPowerCalculator({
+  id = 'buying-power',
+  eyebrow = 'Quick check',
+  heading = "What's your buying power?",
+  sub = 'Get an initial estimate before you start house hunting.',
+  lede = 'Use our quick calculator to get an indication of your potential borrowing position.',
+  sidebarHeading = 'Want a more accurate assessment?',
+  sidebarText = 'A calculator gives you an estimate. Your actual borrowing position depends on your complete financial circumstances.',
+  sidebarCtaLabel = 'Get My Free Assessment',
+  sidebarCtaHref = '#check',
+  formHead = 'Quick check',
+  submitLabel = 'Calculate My Buying Power',
+  errorMsg = 'Please enter your income to see an estimate.',
+  resultLabel = 'Indicative purchase price',
+  resultSubtext = 'Based on the figures you entered. Indicative only.',
+  lendingLabel = 'Estimated lending',
+  depositLabel = 'Deposit position',
+}) {
   const [income, setIncome] = useState('');
   const [partner, setPartner] = useState('');
   const [deposit, setDeposit] = useState('');
@@ -47,26 +64,28 @@ export default function BuyingPowerCalculator() {
     }, 320);
   };
 
-  const errClass = (id) => (errFields.includes(id) ? ' has-err' : '');
+  const errClass = (name) => (errFields.includes(name) ? ' has-err' : '');
 
   return (
-    <section className="section section--dark" id="buying-power">
+    <section className="section section--dark" id={id}>
       <div className="wrap calc">
         <div className="rv">
-          <p className="eyebrow">Quick check</p>
-          <h2>What's your buying power?</h2>
-          <p className="sub">Get an initial estimate before you start house hunting.</p>
-          <p className="lede">Use our quick calculator to get an indication of your potential borrowing position.</p>
+          {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
+          {heading ? <h2>{heading}</h2> : null}
+          {sub ? <p className="sub">{sub}</p> : null}
+          {lede ? <p className="lede">{lede}</p> : null}
 
-          <div style={{ marginTop: '34px', padding: '26px 28px', borderRadius: '18px', background: 'rgba(255,255,255,.05)', border: '1px solid rgba(255,255,255,.12)' }}>
-            <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Want a more accurate assessment?</h3>
-            <p style={{ margin: '0 0 20px', fontSize: '15px', color: 'rgba(232,240,248,.75)' }}>A calculator gives you an estimate. Your actual borrowing position depends on your complete financial circumstances.</p>
-            <a className="btn btn--ghost" href="#check">Get My Free Assessment</a>
-          </div>
+          {sidebarHeading || sidebarText || sidebarCtaLabel ? (
+            <div style={{ marginTop: '34px', padding: '26px 28px', borderRadius: '18px', background: 'rgba(255,255,255,.05)', border: '1px solid rgba(255,255,255,.12)' }}>
+              {sidebarHeading ? <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>{sidebarHeading}</h3> : null}
+              {sidebarText ? <p style={{ margin: '0 0 20px', fontSize: '15px', color: 'rgba(232,240,248,.75)' }}>{sidebarText}</p> : null}
+              {sidebarCtaLabel ? <a className="btn btn--ghost" href={sidebarCtaHref}>{sidebarCtaLabel}</a> : null}
+            </div>
+          ) : null}
         </div>
 
         <div className="calc__panel calc__panel--dark rv">
-          <p className="formcard__head">Quick check</p>
+          <p className="formcard__head">{formHead}</p>
           <form noValidate onSubmit={handleSubmit}>
             <div className="row2">
               <div className={`field field--money${errClass('q-inc')}`}>
@@ -100,17 +119,17 @@ export default function BuyingPowerCalculator() {
                 <option value="5">5+</option>
               </select>
             </div>
-            <button className="btn btn--primary btn--block btn--lg" type="submit">Calculate My Buying Power</button>
-            <p className={`calc-err${error ? ' is-on' : ''}`} id="q-err">Please enter your income to see an estimate.</p>
+            <button className="btn btn--primary btn--block btn--lg" type="submit">{submitLabel}</button>
+            <p className={`calc-err${error ? ' is-on' : ''}`} id="q-err">{errorMsg}</p>
           </form>
 
           <div ref={resultRef} className={`result${result ? ' is-open' : ''}`} id="q-res">
-            <p className="result__label">Indicative purchase price</p>
+            <p className="result__label">{resultLabel}</p>
             <p className="result__big" id="q-price">{result ? result.price : '$0'}</p>
-            <p className="result__sub">Based on the figures you entered. Indicative only.</p>
+            <p className="result__sub">{resultSubtext}</p>
             <div className="result__split">
-              <div className="result__cell"><b id="q-borrow">{result ? result.borrow : '$0'}</b><span>Estimated lending</span></div>
-              <div className="result__cell"><b id="q-lvr">{result ? result.lvr : '—'}</b><span>Deposit position</span></div>
+              <div className="result__cell"><b id="q-borrow">{result ? result.borrow : '$0'}</b><span>{lendingLabel}</span></div>
+              <div className="result__cell"><b id="q-lvr">{result ? result.lvr : '—'}</b><span>{depositLabel}</span></div>
             </div>
           </div>
         </div>

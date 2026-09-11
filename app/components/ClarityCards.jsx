@@ -1,4 +1,4 @@
-const CARDS = [
+const DEFAULT_CARDS = [
   {
     num: '01',
     title: 'How much can I borrow?',
@@ -48,31 +48,41 @@ const CARDS = [
   },
 ];
 
-export default function ClarityCards() {
+export default function ClarityCards({
+  eyebrow = 'Where most people get stuck',
+  heading = 'Buying your first home can feel complicated.',
+  sub = "You don't have to figure it all out yourself.",
+  lede = 'Before you start scrolling through property listings, get clarity on the numbers that matter.',
+  cards = DEFAULT_CARDS,
+  ctaLabel = 'Get My Free First Home Buyer Check',
+  ctaHref = '#check',
+}) {
   return (
     <section className="section">
       <div className="wrap">
         <div className="center rv" style={{ maxWidth: '820px', margin: '0 auto 56px' }}>
-          <p className="eyebrow">Where most people get stuck</p>
-          <h2>Buying your first home can feel complicated.</h2>
-          <p className="sub">You don't have to figure it all out yourself.</p>
-          <p className="lede">Before you start scrolling through property listings, get clarity on the numbers that matter.</p>
+          {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
+          {heading ? <h2>{heading}</h2> : null}
+          {sub ? <p className="sub">{sub}</p> : null}
+          {lede ? <p className="lede">{lede}</p> : null}
         </div>
 
         <div className="grid grid--4">
-          {CARDS.map((c) => (
-            <div className="card rv" key={c.num}>
+          {cards.map((c) => (
+            <div className="card rv" key={c.num || c.title}>
               <div className="card__ico"><svg viewBox="0 0 24 24">{c.svg}</svg></div>
-              <span className="card__num">{c.num}</span>
+              {c.num ? <span className="card__num">{c.num}</span> : null}
               <h3>{c.title}</h3>
               <p>{c.text}</p>
             </div>
           ))}
         </div>
 
-        <div className="center rv" style={{ marginTop: '48px' }}>
-          <a className="btn btn--navy btn--lg" href="#check">Get My Free First Home Buyer Check</a>
-        </div>
+        {ctaLabel ? (
+          <div className="center rv" style={{ marginTop: '48px' }}>
+            <a className="btn btn--navy btn--lg" href={ctaHref}>{ctaLabel}</a>
+          </div>
+        ) : null}
       </div>
     </section>
   );

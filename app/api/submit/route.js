@@ -123,9 +123,39 @@ function escapeHtml(v) {
     .replace(/'/g, '&#39;');
 }
 
-function buildLeadHtml({ name, mobile, email, income, deposit, submittedAt, source, pageUrl, ip, userAgent }) {
+const RESERVED_FIELDS = new Set([
+  'name', 'mobile', 'email',
+  'website', 'ts', 'source', 'page_url', 'cf-turnstile-response',
+]);
+
+function humanizeKey(k) {
+  return k.replace(/[_-]+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function intentForSource(src) {
+  if (!src) return 'Enquiry';
+  if (/^debt/i.test(src)) return 'Debt Check';
+  if (src === 'hero' || src === 'final_cta') return 'First Home Buyer Check';
+  return 'Enquiry';
+}
+
+function collectExtras(form) {
+  const out = [];
+  for (const [k, v] of form.entries()) {
+    if (RESERVED_FIELDS.has(k)) continue;
+    if (typeof v !== 'string') continue;
+    const val = clean(v, 200);
+    if (!val) continue;
+    // Money-like fields get $ prefix + comma formatting; ranges/selects stay as-is.
+    const looksLikeMoney = /^income$|^deposit$|_amount$|^amount$/i.test(k);
+    const formatted = looksLikeMoney ? '$' + moneyValue(val) : val;
+    out.push({ key: k, label: humanizeKey(k), value: formatted });
+  }
+  return out;
+}
+
+function buildLeadHtml({ name, mobile, email, extras, submittedAt, source, pageUrl, intent }) {
   const e = escapeHtml;
-  const money = (v) => (v ? '$' + e(v) : '<span style="color:#94a3b8;font-style:italic">not supplied</span>');
   const fieldRow = (label, value) => `
     <tr>
       <td style="padding:14px 18px;border-bottom:1px solid #eef2f7;font-family:'Inter',Arial,sans-serif;font-size:13px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.6px;width:38%;vertical-align:top">${label}</td>
@@ -137,12 +167,16 @@ function buildLeadHtml({ name, mobile, email, income, deposit, submittedAt, sour
       <td style="padding:6px 0;font-family:'Inter',Arial,sans-serif;font-size:12px;color:#475569;word-break:break-all">${value}</td>
     </tr>`;
 
+  const extraRows = (extras || [])
+    .map((x) => fieldRow(e(x.label), e(x.value)))
+    .join('');
+
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>New First Home Buyer Check request</title>
+<title>New ${e(intent)} request</title>
 </head>
 <body style="margin:0;padding:0;background:#f1f5f9;font-family:'Inter',Arial,sans-serif;color:#0f172a">
   <span style="display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;overflow:hidden">New lead from ${e(name)} &middot; ${e(email)}</span>
@@ -156,7 +190,7 @@ function buildLeadHtml({ name, mobile, email, income, deposit, submittedAt, sour
             <td style="background:linear-gradient(140deg,#061128 0%,#0b2247 45%,#123059 78%,#16405f 100%);padding:36px 40px;text-align:left">
               <img src="${e(LOGO_URL)}" alt="FundMaster Wealth" height="44" style="height:44px;width:auto;display:block;margin-bottom:22px;border:0;outline:none;text-decoration:none">
               <div style="display:inline-block;padding:5px 12px;border-radius:100px;background:rgba(22,184,166,.18);color:#5eead4;font-family:'Inter',Arial,sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">New Lead</div>
-              <h1 style="margin:0;font-family:Georgia,'Fraunces',serif;font-size:26px;line-height:1.25;color:#ffffff;font-weight:600">First Home Buyer Check request</h1>
+              <h1 style="margin:0;font-family:Georgia,'Fraunces',serif;font-size:26px;line-height:1.25;color:#ffffff;font-weight:600">${e(intent)} request</h1>
               <p style="margin:10px 0 0;font-family:'Inter',Arial,sans-serif;font-size:14px;color:rgba(232,240,248,.75);line-height:1.55">Submitted ${e(submittedAt)} NZT &middot; via <b style="color:#5eead4">${e(source)}</b></p>
             </td>
           </tr>
@@ -169,8 +203,7 @@ function buildLeadHtml({ name, mobile, email, income, deposit, submittedAt, sour
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;background:#fafbfd">
                 ${fieldRow('Mobile', `<a href="tel:${e(mobile.replace(/[^0-9+]/g,''))}" style="color:#0b2247;text-decoration:none;font-weight:600">${e(mobile)}</a>`)}
                 ${fieldRow('Email',  `<a href="mailto:${e(email)}" style="color:#1f6bd6;text-decoration:none;font-weight:600">${e(email)}</a>`)}
-                ${fieldRow('Annual income', money(income))}
-                ${fieldRow('Deposit available', money(deposit))}
+                ${extraRows}
               </table>
 
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:26px">
@@ -231,10 +264,10 @@ export async function POST(req) {
   const name = clean(form.get('name'), 80);
   const mobile = clean(form.get('mobile'), 30);
   const email = clean(form.get('email'), 120);
-  const income = moneyValue(clean(form.get('income'), 20));
-  const deposit = moneyValue(clean(form.get('deposit'), 20));
   const sourceRaw = clean(form.get('source'), 40);
   const source = /^[a-z0-9_-]{1,40}$/i.test(sourceRaw) ? sourceRaw : 'unknown';
+  const extras = collectExtras(form);
+  const intent = intentForSource(source);
   const honey = clean(form.get('website'), 100);
   const ts = clean(form.get('ts'), 20);
   const captcha = clean(form.get('cf-turnstile-response'), 3000);
@@ -256,7 +289,7 @@ export async function POST(req) {
   }
 
   /* 3. Payload scan */
-  const hit = payloadSpam([name, mobile, email, income, deposit]);
+  const hit = payloadSpam([name, mobile, email, ...extras.map((x) => x.value)]);
   if (hit) return drop('payload: ' + hit);
 
   /* 4. Turnstile (only if configured) */
@@ -297,15 +330,15 @@ export async function POST(req) {
 
   const userAgent = (req.headers.get('user-agent') || '').slice(0, 200);
 
+  const padLabel = (s) => (s + ':').padEnd(19, ' ');
   const body = [
-    'New First Home Buyer Check request',
+    'New ' + intent + ' request',
     '='.repeat(42),
     '',
-    'Name:              ' + name,
-    'Mobile:            ' + mobile,
-    'Email:             ' + email,
-    'Annual income:     ' + (income ? '$' + income : 'not supplied'),
-    'Deposit available: ' + (deposit ? '$' + deposit : 'not supplied'),
+    padLabel('Name') + name,
+    padLabel('Mobile') + mobile,
+    padLabel('Email') + email,
+    ...extras.map((x) => padLabel(x.label) + x.value),
     '',
     '-'.repeat(42),
     'Submitted:  ' + submittedAt + ' NZT',
@@ -318,17 +351,30 @@ export async function POST(req) {
   ].join('\n');
 
   const html = buildLeadHtml({
-    name, mobile, email, income, deposit,
-    submittedAt, source, pageUrl, ip, userAgent,
+    name, mobile, email, extras, intent,
+    submittedAt, source, pageUrl,
   });
+
+  const smtpUser = (process.env.SMTP_USER || '').trim();
+  const smtpPass = (process.env.SMTP_PASS || '').replace(/\s+/g, '');
+
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(
+      '[fundmaster-lead] SMTP →',
+      'user=' + smtpUser,
+      'pass.length=' + smtpPass.length,
+      'host=' + (process.env.SMTP_HOST || 'smtp.gmail.com'),
+      'port=' + Number(process.env.SMTP_PORT || 465),
+    );
+  }
 
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || 'smtp.gmail.com',
     port: Number(process.env.SMTP_PORT || 465),
     secure: Number(process.env.SMTP_PORT || 465) === 465,
     auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
+      user: smtpUser,
+      pass: smtpPass,
     },
   });
 
@@ -337,7 +383,7 @@ export async function POST(req) {
       from: `"${headerSafe(FROM_NAME)}" <${headerSafe(FROM_EMAIL)}>`,
       to: TO_EMAIL,
       replyTo: `"${headerSafe(name)}" <${headerSafe(email)}>`,
-      subject: 'First Home Buyer Check — ' + name,
+      subject: intent + ' — ' + name,
       text: body,
       html,
     });

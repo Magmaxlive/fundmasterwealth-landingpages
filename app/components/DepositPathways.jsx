@@ -1,4 +1,4 @@
-const PATHS = [
+const DEFAULT_PATHS = [
   {
     title: 'KiwiSaver',
     text: 'Understand whether your KiwiSaver could contribute towards your first home.',
@@ -56,19 +56,29 @@ const sectionStyle = {
   color: '#e8f0f8',
 };
 
-export default function DepositPathways() {
+export default function DepositPathways({
+  id = 'pathways',
+  eyebrow = 'Deposit pathways',
+  heading = "Your deposit doesn't have to be the only starting point.",
+  sub = 'There may be more options than you think.',
+  lede = 'Your deposit is an important part of buying your first home, but it may not be the only factor. Depending on your circumstances, potential pathways may include:',
+  paths = DEFAULT_PATHS,
+  ctaLabel = 'See What I May Qualify For',
+  ctaHref = '#check',
+  disclaimer = 'Eligibility criteria, lending requirements and government schemes can change. Your adviser can help you understand what may apply to your circumstances.',
+}) {
   return (
-    <section className="section" style={sectionStyle} id="pathways">
+    <section className="section" style={sectionStyle} id={id}>
       <div className="wrap">
         <div className="center rv" style={{ maxWidth: '840px', margin: '0 auto 52px' }}>
-          <p className="eyebrow" style={{ color: 'var(--teal)' }}>Deposit pathways</p>
-          <h2 style={{ color: '#fff' }}>Your deposit doesn't have to be the only starting point.</h2>
-          <p className="sub" style={{ color: 'var(--teal)' }}>There may be more options than you think.</p>
-          <p className="lede" style={{ color: 'rgba(232,240,248,.78)' }}>Your deposit is an important part of buying your first home, but it may not be the only factor. Depending on your circumstances, potential pathways may include:</p>
+          {eyebrow ? <p className="eyebrow" style={{ color: 'var(--teal)' }}>{eyebrow}</p> : null}
+          {heading ? <h2 style={{ color: '#fff' }}>{heading}</h2> : null}
+          {sub ? <p className="sub" style={{ color: 'var(--teal)' }}>{sub}</p> : null}
+          {lede ? <p className="lede" style={{ color: 'rgba(232,240,248,.78)' }}>{lede}</p> : null}
         </div>
 
         <div className="paths">
-          {PATHS.map((p) => (
+          {paths.map((p) => (
             <div className="path rv" key={p.title}>
               <div className="path__ico"><svg viewBox="0 0 24 24">{p.svg}</svg></div>
               <h3>{p.title}</h3>
@@ -77,10 +87,12 @@ export default function DepositPathways() {
           ))}
         </div>
 
-        <div className="center rv" style={{ marginTop: '46px' }}>
-          <a className="btn btn--primary btn--lg" href="#check">See What I May Qualify For</a>
-          <p className="disclaimer">Eligibility criteria, lending requirements and government schemes can change. Your adviser can help you understand what may apply to your circumstances.</p>
-        </div>
+        {(ctaLabel || disclaimer) && (
+          <div className="center rv" style={{ marginTop: '46px' }}>
+            {ctaLabel ? <a className="btn btn--primary btn--lg" href={ctaHref}>{ctaLabel}</a> : null}
+            {disclaimer ? <p className="disclaimer">{disclaimer}</p> : null}
+          </div>
+        )}
       </div>
     </section>
   );
