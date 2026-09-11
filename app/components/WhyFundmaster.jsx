@@ -1,4 +1,4 @@
-const ITEMS = [
+const DEFAULT_ITEMS = [
   {
     title: 'Access to multiple lenders',
     text: 'Explore lending options from a range of lenders.',
@@ -37,19 +37,25 @@ const ITEMS = [
   },
 ];
 
-export default function WhyFundmaster() {
+export default function WhyFundmaster({
+  eyebrow = 'WhyFundmaster Wealth',
+  heading = 'Get advice before you sign anything.',
+  sub = 'Your first home deserves a well-thought-out plan.',
+  lede = 'Buying your first home is a major financial decision. Having the right advice early can help you approach it with greater clarity and confidence.',
+  items = DEFAULT_ITEMS,
+}) {
   return (
     <section className="section">
       <div className="wrap">
         <div className="center rv" style={{ maxWidth: '800px', margin: '0 auto 48px' }}>
-          <p className="eyebrow">WhyFundmaster Wealth</p>
-          <h2>Get advice before you sign anything.</h2>
-          <p className="sub">Your first home deserves a well-thought-out plan.</p>
-          <p className="lede">Buying your first home is a major financial decision. Having the right advice early can help you approach it with greater clarity and confidence.</p>
+          {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
+          {heading ? <h2>{heading}</h2> : null}
+          {sub ? <p className="sub">{sub}</p> : null}
+          {lede ? <p className="lede">{lede}</p> : null}
         </div>
 
         <div className="why rv">
-          {ITEMS.map((i) => (
+          {items.map((i) => (
             <div className="why__item" key={i.title}>
               <div className="why__ico"><svg viewBox="0 0 24 24">{i.svg}</svg></div>
               <h3>{i.title}</h3>

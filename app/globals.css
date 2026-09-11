@@ -1,3 +1,7 @@
+/* ---------- Tailwind v4 (utilities + theme tokens, no preflight) ---------- */
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities);
+
 /* ============================================================
    FUNDMASTER WEALTH — FIRST HOME BUYER LANDING PAGE
    Brand tokens sourced from fundmasterwealth.co.nz
