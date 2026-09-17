@@ -9,6 +9,13 @@ import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
 import Testimonials from '../components/Testimonials'
 import SiteFooter from '../components/SiteFooter'
 
+export const metadata = {
+  title: 'Home Loan Comparison | FundMaster Wealth',
+  description:
+    "Found a home loan you like? There might be a better one. Get a free home loan comparison across 15+ NZ lenders — no pressure, no obligation.",
+  icons: { icon: '/images/favicon.ico' },
+};
+
 const Loan_cards = [
   {
     num: '01',
