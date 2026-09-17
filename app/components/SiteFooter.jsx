@@ -1,6 +1,6 @@
 export default function SiteFooter({
   logo = '/images/logo-w.svg',
-  logoAlt = 'FundMaster Wealth',
+  logoAlt = 'Fundmaster Wealth',
   blurb = 'FundMaster Wealth — mortgage advice for New Zealand first home buyers. From your first conversation through to settlement.',
   ctaLabel = 'Get My Free First Home Buyer Check',
   ctaHref = '#check',

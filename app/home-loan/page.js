@@ -4,6 +4,10 @@ import Header from '../components/Header'
 import Hero from '../components/Hero'
 import TrustStrip from '../components/TrustStrip'
 import ClarityCards from '../components/ClarityCards'
+import WhyFundmaster from '../components/WhyFundmaster'
+import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
+import Testimonials from '../components/Testimonials'
+import SiteFooter from '../components/SiteFooter'
 
 const Loan_cards = [
   {
@@ -55,6 +59,52 @@ const Loan_cards = [
   },
 ];
 
+const WHY_ITEMS = [
+  {
+    title: 'We compare across the market, not just one bank',
+    text: 'Options from 15+ lenders, so you can see what actually fits.',
+    svg: (
+      <>
+        <rect x="3" y="8" width="18" height="12" rx="2" />
+        <path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2" />
+        <path d="M3 13h18" />
+      </>
+    ),
+  },
+  {
+    title: 'Advice based on your actual numbers',
+    text: 'Your income, deposit and commitments — not a generic calculator.',
+    svg: (
+      <>
+        <rect x="4" y="2" width="16" height="20" rx="2" />
+        <line x1="8" y1="6" x2="16" y2="6" />
+        <line x1="8" y1="10" x2="16" y2="10" />
+        <line x1="8" y1="14" x2="12" y2="14" />
+      </>
+    ),
+  },
+  {
+    title: 'No pressure, no obligation',
+    text: "A clear next step, not a hard sell. You decide what happens next.",
+    svg: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M9 12l2 2 4-4" />
+      </>
+    ),
+  },
+  {
+    title: 'Support from application through to settlement',
+    text: 'One adviser stays with you across the whole process.',
+    svg: (
+      <>
+        <path d="M9 11l3 3L22 4" />
+        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+      </>
+    ),
+  },
+];
+
 function page() {
   return (
     <div>
@@ -91,6 +141,22 @@ function page() {
         cards={Loan_cards}
         ctaLabel=" Check My Loan "
         ctaHref="#check"
+        />
+
+        <BorrowingPowerCalculator/>
+
+        <WhyFundmaster
+        eyebrow = 'Why Fundmaster Wealth'
+        heading = 'One Adviser. 15+ Lenders. No Guesswork'
+        lede = ''
+        sub = 'We take the time to understand your situation, explain your options and help you make informed financial decisions.'
+        items={WHY_ITEMS}
+        />
+
+        <Testimonials/>
+        <SiteFooter
+          blurb = 'Before You Choose a Lender, See What Else is Out There.Get a free home loan comparison with FundMaster Wealth.'
+        ctaLabel = ' Compare My Loan'
         />
       
     </div>
