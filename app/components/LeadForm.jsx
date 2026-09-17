@@ -109,6 +109,7 @@ export default function LeadForm({
   incomeLabel = 'Annual Income',
   depositLabel = 'Deposit Available',
   showIncomeDeposit = true,
+  showDeposit = true,
   extraFields,
 }) {
   const formRef = useRef(null);
@@ -214,32 +215,39 @@ export default function LeadForm({
         {extraFields && extraFields.length > 0 ? (
           renderExtraFieldRows(extraFields, extraValues, updateExtra, source)
         ) : showIncomeDeposit ? (
-          <div className="row2">
-            <div className="field field--money">
-              <label htmlFor={`${source}-income`}>{incomeLabel}</label>
-              <input
-                id={`${source}-income`}
-                name="income"
-                type="text"
-                inputMode="numeric"
-                placeholder="Enter amount"
-                value={income}
-                onChange={(e) => setIncome(formatMoney(e.target.value))}
-              />
-            </div>
-            <div className="field field--money">
-              <label htmlFor={`${source}-deposit`}>{depositLabel}</label>
-              <input
-                id={`${source}-deposit`}
-                name="deposit"
-                type="text"
-                inputMode="numeric"
-                placeholder="Enter amount"
-                value={deposit}
-                onChange={(e) => setDeposit(formatMoney(e.target.value))}
-              />
-            </div>
-          </div>
+          (() => {
+            const incomeField = (
+              <div className="field field--money" key="income">
+                <label htmlFor={`${source}-income`}>{incomeLabel}</label>
+                <input
+                  id={`${source}-income`}
+                  name="income"
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="Enter amount"
+                  value={income}
+                  onChange={(e) => setIncome(formatMoney(e.target.value))}
+                />
+              </div>
+            );
+            const depositField = showDeposit ? (
+              <div className="field field--money" key="deposit">
+                <label htmlFor={`${source}-deposit`}>{depositLabel}</label>
+                <input
+                  id={`${source}-deposit`}
+                  name="deposit"
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="Enter amount"
+                  value={deposit}
+                  onChange={(e) => setDeposit(formatMoney(e.target.value))}
+                />
+              </div>
+            ) : null;
+            return showDeposit ? (
+              <div className="row2">{incomeField}{depositField}</div>
+            ) : incomeField;
+          })()
         ) : null}
 
         <button className="btn btn--primary btn--block btn--lg" type="submit" disabled={submitting}>
