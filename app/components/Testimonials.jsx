@@ -2,22 +2,19 @@ import { AvatarIcon, Stars } from './icons';
 
 const DEFAULT_QUOTES = [
   {
-    text: '“Go talk to the guys atFundmaster because they will set you up with goals that will achieve your end result, which is buying a house.”',
-    name: 'First Home Buyers',
+    text: 'We had no idea where to start. Fundmaster walked us through every step and got us approved when two banks had already said no. We moved in six weeks later.',
+    name: 'Priya & Raj',
     location: 'Auckland',
-    language: 'English',
   },
   {
-    text: '“Other brokers declined me. I saw aFundmaster ad on Facebook and reached out. They worked really hard on my mortgage and got it sorted.”',
-    name: 'Fundmaster Client',
-    location: 'Auckland',
-    language: 'Punjabi',
+    text: "I wanted to grow my portfolio but didn't know how to structure the lending. Fundmaster helped me access equity from my existing home to buy my second property.",
+    name: 'David T',
+    location: 'Christchurch',
   },
   {
-    text: '“My application was one of the toughest, but Rochelle, Dave and the team stood by us and got us into our first home. Highly recommendFundmaster.”',
-    name: 'Vineet',
-    location: 'Auckland',
-    language: 'English',
+    text: "Refinancing saved us over $400 a month. The team then built us a full wealth plan  KiwiSaver, insurance, the works. Genuinely life-changing advice.",
+    name: 'Amelia S',
+    location: 'Wellington',
   },
 ];
 
@@ -29,10 +26,10 @@ const DEFAULT_STATS = [
 ];
 
 export default function Testimonials({
-  eyebrow = 'Real journeys',
-  heading = 'They started where you are.',
+  eyebrow = 'Testimonials',
+  heading = 'What Our Clients Have to Say',
   sub = 'Real people. Real first homes. Real journeys.',
-  lede = "You don't need to have everything figured out before you begin. Hear from first-home buyers who worked withFundmaster Wealth to move from uncertainty to owning their home.",
+  lede = "You don't need to have everything figured out before you begin. Hear from first-home buyers who worked with Fundmaster Wealth to move from uncertainty to owning their home.",
   quotes = DEFAULT_QUOTES,
   ratingScore = '5.0',
   ratingTitle = 'Google Rating',
@@ -45,8 +42,7 @@ export default function Testimonials({
         <div className="rv" style={{ maxWidth: '80rem', margin: '0 auto' }}>
           {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
           {heading ? <h2>{heading}</h2> : null}
-          {sub ? <p className="sub">{sub}</p> : null}
-          {lede ? <p className="lede">{lede}</p> : null}
+          
         </div>
 
         {quotes && quotes.length > 0 && (

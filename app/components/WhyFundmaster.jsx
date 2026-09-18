@@ -51,7 +51,7 @@ export default function WhyFundmaster({
           {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
           {heading ? <h2>{heading}</h2> : null}
           {sub ? <p className="sub">{sub}</p> : null}
-          {lede ? <p className="lede">{lede}</p> : null}
+          
         </div>
 
         <div className="why rv">
