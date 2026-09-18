@@ -19,7 +19,7 @@ export const metadata = {
 const Loan_cards = [
   {
     num: '01',
-    title: 'What can you actually borrow?',
+    title: 'What can you borrow?',
     text: "Not what a calculator guesses. What you'd actually get approved for.",
     svg: (
       <>
@@ -123,7 +123,7 @@ function page() {
         body="You could go straight to your bank. Or you could see what else is out there first."
         includesTitle="Free Home Loan Comparison"
         includes={[
-          "See what's actually available to you",
+          "See what's available to you",
           "Compare options across 15+ lenders",
           "Understand what fits your situation",
           "Get a clear next step, not just a quote"
@@ -156,13 +156,13 @@ function page() {
         eyebrow = 'Why Fundmaster Wealth'
         heading = 'One Adviser. 15+ Lenders. No Guesswork'
         lede = ''
-        sub = 'We take the time to understand your situation, explain your options and help you make informed financial decisions.'
+        sub = 'We understand your situation, explain your options, and help you make confident financial decisions.'
         items={WHY_ITEMS}
         />
 
         <Testimonials/>
         <SiteFooter
-          blurb = 'Before You Choose a Lender, See What Else is Out There.Get a free home loan comparison with FundMaster Wealth.'
+          blurb = 'Before you choose a lender, explore your options. Get a free home loan comparison with Fundmaster Wealth.'
         ctaLabel = ' Compare My Loan'
         />
       

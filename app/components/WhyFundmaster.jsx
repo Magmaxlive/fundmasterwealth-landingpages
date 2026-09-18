@@ -50,6 +50,7 @@ export default function WhyFundmaster({
         <div className="center rv" style={{ maxWidth: '800px', margin: '0 auto 48px' }}>
           {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
           {heading ? <h2>{heading}</h2> : null}
+          {sub ? <p className="sub">{sub}</p> : null}
           
         </div>
 

@@ -27,9 +27,9 @@ const DEFAULT_STATS = [
 
 export default function Testimonials({
   eyebrow = 'Testimonials',
-  heading = 'They started where you are.',
+  heading = 'What Our Clients Have to Say',
   sub = 'Real people. Real first homes. Real journeys.',
-  lede = "You don't need to have everything figured out before you begin. Hear from first-home buyers who worked withFundmaster Wealth to move from uncertainty to owning their home.",
+  lede = "You don't need to have everything figured out before you begin. Hear from first-home buyers who worked with Fundmaster Wealth to move from uncertainty to owning their home.",
   quotes = DEFAULT_QUOTES,
   ratingScore = '5.0',
   ratingTitle = 'Google Rating',
