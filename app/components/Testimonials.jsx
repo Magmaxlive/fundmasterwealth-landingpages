@@ -2,12 +2,12 @@ import { AvatarIcon, Stars } from './icons';
 
 const DEFAULT_QUOTES = [
   {
-    text: 'We had no idea where to start. Fundmaster walked us through every step and got us approved when two banks had already said no. We moved in six weeks later.',
+    text: 'We had no idea where to start. Fundmaster Wealth walked us through every step and got us approved when two banks had already said no. We moved in six weeks later.',
     name: 'Priya & Raj',
     location: 'Auckland',
   },
   {
-    text: "I wanted to grow my portfolio but didn't know how to structure the lending. Fundmaster helped me access equity from my existing home to buy my second property.",
+    text: "I wanted to grow my portfolio but didn't know how to structure the lending. Fundmaster wealth helped me access equity from my existing home to buy my second property.",
     name: 'David T',
     location: 'Christchurch',
   },

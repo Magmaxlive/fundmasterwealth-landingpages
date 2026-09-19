@@ -80,7 +80,7 @@ const WHY_ITEMS = [
   },
   {
     title: 'Advice based on your actual numbers',
-    text: 'Your income, deposit and commitments  not a generic calculator.',
+    text: 'Your income, deposit, and commitments  not a generic calculator.',
     svg: (
       <>
         <rect x="4" y="2" width="16" height="20" rx="2" />
