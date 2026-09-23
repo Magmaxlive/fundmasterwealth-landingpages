@@ -59,7 +59,7 @@ export default function WhyFundmaster({
             <div className="why__item" key={i.title}>
               <div className="why__ico"><svg viewBox="0 0 24 24">{i.svg}</svg></div>
               <h3>{i.title}</h3>
-              <p>{i.text}</p>
+              {i.text ? <p>{i.text}</p> : null}
             </div>
           ))}
         </div>
