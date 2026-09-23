@@ -2,6 +2,56 @@ import React from 'react'
 import PageEffects from '../components/PageEffects'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
+import TrustStrip from '../components/TrustStrip'
+import ClarityCards from '../components/ClarityCards'
+
+const rate_cards = [
+  {
+    num: '01',
+    title: 'What rate would you actually get?',
+    text: "Advertised and approved aren't always the same number.",
+    svg: (
+      <>
+        <path d="M12 1v22" />
+        <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+      </>
+    ),
+  },
+  {
+    num: '02',
+    title: 'Fixed, floating, or split?',
+    text: 'Getting this right can matter more than chasing a slightly lower rate.',
+    svg: (
+      <>
+        <rect x="3" y="4" width="18" height="4" rx="1" />
+        <rect x="3" y="10" width="18" height="4" rx="1" />
+        <rect x="3" y="16" width="18" height="4" rx="1" />
+      </>
+    ),
+  },
+  {
+    num: '03',
+    title: "What's the real cost over the term?",
+    text: 'Fees and break costs can outweigh a lower rate.',
+    svg: (
+      <>
+        <path d="M3 3v18h18" />
+        <path d="M7 15l4-5 3 3 5-7" />
+      </>
+    ),
+  },
+  {
+    num: '04',
+    title: 'Is now the right time to lock in?',
+    text: "Timing matters. We'll walk you through it.",
+    svg: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+      </>
+    ),
+  },
+];
 
 function page() {
   return (
@@ -29,6 +79,16 @@ function page() {
                   dataLayerFormName: 'home_loan_rate',
                   showDeposit: false,
                 }}
+                />
+                <TrustStrip/>
+                <ClarityCards
+                    eyebrow="Before You Choose a Lender"
+                    heading="What rate tables don't show you"
+                    sub=""
+                    lede=""
+                    cards={rate_cards}
+                    ctaLabel="Review My Rate"
+                    ctaHref="#check"
                 />
       
     </div>
