@@ -9,6 +9,13 @@ import WhyFundmaster from '../components/WhyFundmaster'
 import Testimonials from '../components/Testimonials'
 import SiteFooter from '../components/SiteFooter'
 
+export const metadata = {
+  title: 'Home Loan Rate Review | FundMaster Wealth',
+  description:
+    "That 'great' home loan rate might not be so great. Get a free rate and loan review across 15+ NZ lenders — structure, fees and timing, not just the headline number.",
+  icons: { icon: '/images/favicon.ico' },
+};
+
 const rate_cards = [
   {
     num: '01',
