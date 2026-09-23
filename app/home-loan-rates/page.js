@@ -4,6 +4,10 @@ import Header from '../components/Header'
 import Hero from '../components/Hero'
 import TrustStrip from '../components/TrustStrip'
 import ClarityCards from '../components/ClarityCards'
+import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
+import WhyFundmaster from '../components/WhyFundmaster'
+import Testimonials from '../components/Testimonials'
+import SiteFooter from '../components/SiteFooter'
 
 const rate_cards = [
   {
@@ -53,6 +57,46 @@ const rate_cards = [
   },
 ];
 
+const WHY_ITEMS = [
+  {
+    title: 'Rate comparisons across 15+ lenders',
+    svg: (
+      <>
+        <rect x="3" y="8" width="18" height="12" rx="2" />
+        <path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2" />
+        <path d="M3 13h18" />
+      </>
+    ),
+  },
+  {
+    title: 'Advice on structure, not just pricing',
+    svg: (
+      <>
+        <rect x="3" y="4" width="18" height="4" rx="1" />
+        <rect x="3" y="10" width="18" height="4" rx="1" />
+        <rect x="3" y="16" width="18" height="4" rx="1" />
+      </>
+    ),
+  },
+  {
+    title: 'No pressure, no obligation',
+    svg: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M9 12l2 2 4-4" />
+      </>
+    ),
+  },
+  {
+    title: 'One conversation, the full picture',
+    svg: (
+      <>
+        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+      </>
+    ),
+  },
+];
+
 function page() {
   return (
     <div>
@@ -90,6 +134,19 @@ function page() {
                     ctaLabel="Review My Rate"
                     ctaHref="#check"
                 />
+                <BorrowingPowerCalculator/>
+                 <WhyFundmaster
+                    eyebrow = 'Why Fundmaster Wealth'
+                    heading = 'We Compare More Than the Number'
+                    lede = ''
+                    sub = 'We understand your situation, explain your options, and help you make confident financial decisions.'
+                    items={WHY_ITEMS}
+                    />
+
+                <Testimonials/>
+                <SiteFooter ctaLabel='Compare my rate' blurb="Don't Choose a Rate Without Seeing the Full Picture.
+Get a free rate and loan review with FundMaster Wealth."  />
+                
       
     </div>
   )
