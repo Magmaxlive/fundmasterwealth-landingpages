@@ -22,6 +22,7 @@ const FROM_NAME = process.env.FROM_NAME || 'Fundmaster Wealth Website';
 const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET || '';
 const SITE_URL = (process.env.SITE_URL || 'https://www.fundmasterwealth.co.nz').replace(/\/$/, '');
 const LOGO_URL = process.env.LOGO_URL || SITE_URL + '/images/logo-c.svg';
+const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL || '';
 
 const MIN_FILL_SECONDS = 4;
 
@@ -125,7 +126,7 @@ function escapeHtml(v) {
 
 const RESERVED_FIELDS = new Set([
   'name', 'mobile', 'email',
-  'website', 'ts', 'source', 'page_url', 'cf-turnstile-response',
+  'website', 'fm_hp_field', 'ts', 'source', 'page_url', 'cf-turnstile-response',
 ]);
 
 function humanizeKey(k) {
@@ -135,7 +136,9 @@ function humanizeKey(k) {
 function intentForSource(src) {
   if (!src) return 'Enquiry';
   if (/^debt/i.test(src)) return 'Debt Check';
-  if (src === 'hero' || src === 'final_cta') return 'First Home Buyer Check';
+  if (/first home/i.test(src) || src === 'hero' || src === 'final_cta') return 'First Home Buyer Check';
+  if (/home loan rate/i.test(src)) return 'Home Loan Rate Review';
+  if (/home loan/i.test(src)) return 'Home Loan Comparison';
   return 'Enquiry';
 }
 
@@ -191,7 +194,7 @@ function buildLeadHtml({ name, mobile, email, extras, submittedAt, source, pageU
               <img src="${e(LOGO_URL)}" alt="FundMaster Wealth" height="44" style="height:44px;width:auto;display:block;margin-bottom:22px;border:0;outline:none;text-decoration:none">
               <div style="display:inline-block;padding:5px 12px;border-radius:100px;background:rgba(22,184,166,.18);color:#5eead4;font-family:'Inter',Arial,sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">New Lead</div>
               <h1 style="margin:0;font-family:Georgia,'Fraunces',serif;font-size:26px;line-height:1.25;color:#ffffff;font-weight:600">${e(intent)} request</h1>
-              <p style="margin:10px 0 0;font-family:'Inter',Arial,sans-serif;font-size:14px;color:rgba(232,240,248,.75);line-height:1.55">Submitted ${e(submittedAt)} NZT &middot; via <b style="color:#5eead4">${e(source)}</b></p>
+              <p style="margin:10px 0 0;font-family:'Inter',Arial,sans-serif;font-size:14px;color:rgba(232,240,248,.75);line-height:1.55">Submitted ${e(submittedAt)} &middot; via <b style="color:#5eead4">${e(source)}</b></p>
             </td>
           </tr>
 
@@ -265,10 +268,10 @@ export async function POST(req) {
   const mobile = clean(form.get('mobile'), 30);
   const email = clean(form.get('email'), 120);
   const sourceRaw = clean(form.get('source'), 40);
-  const source = /^[a-z0-9_-]{1,40}$/i.test(sourceRaw) ? sourceRaw : 'unknown';
+  const source = /^[a-z0-9 _-]{1,40}$/i.test(sourceRaw) ? sourceRaw : 'unknown';
   const extras = collectExtras(form);
   const intent = intentForSource(source);
-  const honey = clean(form.get('website'), 100);
+  const honey = clean(form.get('fm_hp_field'), 100);
   const ts = clean(form.get('ts'), 20);
   const captcha = clean(form.get('cf-turnstile-response'), 3000);
   const pageUrl = /^https?:\/\//i.test(clean(form.get('page_url'), 300))
@@ -276,6 +279,8 @@ export async function POST(req) {
     : req.headers.get('referer') || '';
 
   const ip = clientIp(req);
+
+  console.log('[fundmaster-lead] incoming submit — source:', source, '| name:', name, '| email:', email, '| honey?', !!honey, '| ts:', ts);
 
   /* 1. Honeypot */
   if (honey) return drop('honeypot filled');
@@ -326,7 +331,8 @@ export async function POST(req) {
     year: 'numeric',
     hour: 'numeric',
     minute: '2-digit',
-  });
+    hour12: true,
+  }) + ' NZT';
 
   const userAgent = (req.headers.get('user-agent') || '').slice(0, 200);
 
@@ -341,7 +347,7 @@ export async function POST(req) {
     ...extras.map((x) => padLabel(x.label) + x.value),
     '',
     '-'.repeat(42),
-    'Submitted:  ' + submittedAt + ' NZT',
+    'Submitted:  ' + submittedAt,
     'Form:       ' + source,
     'Page:       ' + pageUrl,
     'IP:         ' + ip,
@@ -378,21 +384,60 @@ export async function POST(req) {
     },
   });
 
-  try {
-    await transporter.sendMail({
-      from: `"${headerSafe(FROM_NAME)}" <${headerSafe(FROM_EMAIL)}>`,
-      to: TO_EMAIL,
-      replyTo: `"${headerSafe(name)}" <${headerSafe(email)}>`,
-      subject: intent + ' — ' + name,
-      text: body,
-      html,
-    });
-  } catch (err) {
-    console.error('[fundmaster-lead] SMTP send failed:', err);
+  const emailPromise = transporter.sendMail({
+    from: `"${headerSafe(FROM_NAME)}" <${headerSafe(FROM_EMAIL)}>`,
+    to: TO_EMAIL,
+    replyTo: `"${headerSafe(name)}" <${headerSafe(email)}>`,
+    subject: intent + ' — ' + name,
+    text: body,
+    html,
+  });
+
+  const sheetPromise = postToGoogleScript({
+    name, mobile, email, extras, intent,
+    submittedAt, source, pageUrl, ip, userAgent,
+  });
+
+  const [emailRes, sheetRes] = await Promise.allSettled([emailPromise, sheetPromise]);
+
+  if (sheetRes.status === 'rejected') {
+    console.error('[fundmaster-lead] Google Script post failed:', sheetRes.reason);
+  }
+
+  if (emailRes.status === 'rejected') {
+    console.error('[fundmaster-lead] SMTP send failed:', emailRes.reason);
     return json(false, 'We could not send that just now. Please try again shortly.', 502);
   }
 
   return json(true, 'ok');
+}
+
+async function postToGoogleScript(lead) {
+  if (!GOOGLE_SCRIPT_URL) return;
+  const payload = {
+    name: lead.name,
+    mobile: lead.mobile,
+    email: lead.email,
+    service: lead.source,
+    intent: lead.intent,
+    source: lead.source,
+    page_url: lead.pageUrl,
+    date: lead.submittedAt,
+    ip: lead.ip,
+    user_agent: lead.userAgent,
+    ...Object.fromEntries((lead.extras || []).map((x) => [x.key, x.value])),
+  };
+  console.log('[fundmaster-lead] → Google Script payload:', JSON.stringify(payload));
+  const res = await fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+    redirect: 'follow',
+    signal: AbortSignal.timeout(8000),
+  });
+  const text = await res.text().catch(() => '');
+  console.log('[fundmaster-lead] ← Google Script status:', res.status, 'body:', text.slice(0, 500));
+  if (!res.ok) throw new Error('Google Script responded ' + res.status + ' — ' + text.slice(0, 200));
 }
 
 export function GET() {
