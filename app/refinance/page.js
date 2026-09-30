@@ -5,6 +5,7 @@ import Hero from '../components/Hero'
 import TrustStrip from '../components/TrustStrip'
 import ClarityCards from '../components/ClarityCards'
 import WhyFundmaster from '../components/WhyFundmaster'
+import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
 
 const Clarity_cards = [
     {
@@ -133,6 +134,7 @@ function page() {
             ctaLabel="Check My Options"
             ctaHref="#check"
         />
+        <BorrowingPowerCalculator/>
 
        <WhyFundmaster
             eyebrow = 'Why FundMaster Wealth'
