@@ -5,6 +5,7 @@ import Hero from '../components/Hero'
 import TrustStrip from '../components/TrustStrip'
 import ClarityCards from '../components/ClarityCards'
 import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
+import WhyFundmaster from '../components/WhyFundmaster'
 
 const Clarity_cards = [
     {
@@ -54,6 +55,45 @@ const Clarity_cards = [
     },
 ]
 
+const WHY_ITEMS = [
+    {
+        title: 'Current offers compared across 15+ lenders',
+        svg: (
+            <>
+                <rect x="3" y="8" width="18" height="12" rx="2" />
+                <path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2" />
+                <path d="M3 13h18" />
+            </>
+        ),
+    },
+    {
+        title: "Straight answers on what a deal actually costs you",
+        svg: (
+            <>
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" />
+            </>
+        ),
+    },
+    {
+        title: 'No pressure, no obligation',
+        svg: (
+            <>
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+            </>
+        ),
+    },
+    {
+        title: 'Guidance from comparison through to settlement',
+        svg: (
+            <>
+                <path d="M9 11l3 3L22 4" />
+                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+            </>
+        ),
+    },
+]
+
 function page() {
   return (
     <div>
@@ -92,6 +132,14 @@ function page() {
                 ctaHref="#check"
             />
             <BorrowingPowerCalculator/>
+            
+            <WhyFundmaster
+                eyebrow = 'Why Fundmaster Wealth'
+                heading = 'We Look at the Whole Deal'
+                lede = ''
+                sub = 'We understand your situation, explain your options, and help you make confident financial decisions.'
+                items={WHY_ITEMS}
+                />
     </div>
   )
 }
