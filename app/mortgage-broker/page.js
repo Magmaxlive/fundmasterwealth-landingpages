@@ -7,6 +7,44 @@ import ClarityCards from '../components/ClarityCards'
 import WhyFundmaster from '../components/WhyFundmaster'
 import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
 
+const WHY_ITEMS = [
+    {
+        title: "Advisers who compare 15+ lenders, not just one bank's products",
+        svg: (
+            <>
+                <rect x="3" y="8" width="18" height="12" rx="2" />
+                <path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2" />
+                <path d="M3 13h18" />
+            </>
+        ),
+    },
+    {
+        title: '232+ five-star reviews',
+        svg: (
+            <>
+                <path d="M12 2l2.4 6.2L21 9.2l-4.8 4.4 1.3 6.4L12 16.8 6.5 20l1.3-6.4L3 9.2l6.6-1z" />
+            </>
+        ),
+    },
+    {
+        title: 'Advice built around your situation, not a sales target',
+        svg: (
+            <>
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+            </>
+        ),
+    },
+    {
+        title: 'No pressure, no obligation, ever',
+        svg: (
+            <>
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+            </>
+        ),
+    },
+]
+
 const Clarity_cards = [
     {
         num: '01',
@@ -95,6 +133,14 @@ function page() {
             />
 
            <BorrowingPowerCalculator/>
+
+           <WhyFundmaster
+                eyebrow = 'Why Go Through FundMaster Wealth'
+                heading = 'Real Guidance From Expert Advisers'
+                lede = ''
+                sub = 'We understand your situation, explain your options, and help you make confident financial decisions.'
+                items={WHY_ITEMS}
+                />
       
     </div>
   )
