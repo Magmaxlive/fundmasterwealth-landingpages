@@ -7,6 +7,7 @@ import ClarityCards from '../components/ClarityCards'
 import WhyFundmaster from '../components/WhyFundmaster'
 import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
 import Testimonials from '../components/Testimonials'
+import SiteFooter from '../components/SiteFooter'
 
 const WHY_ITEMS = [
     {
@@ -144,6 +145,8 @@ function page() {
                 />
 
             <Testimonials/>
+            <SiteFooter ctaLabel='Talk to an Adviser' blurb="Talk to an Expert Before You Talk to the Bank.
+                Book a free 30-minute consultation with FundMaster Wealth."  />
       
     </div>
   )
