@@ -7,6 +7,7 @@ import ClarityCards from '../components/ClarityCards'
 import WhyFundmaster from '../components/WhyFundmaster'
 import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
 import Testimonials from '../components/Testimonials'
+import SiteFooter from '../components/SiteFooter'
 
 const Clarity_cards = [
     {
@@ -146,6 +147,9 @@ function page() {
             />
 
         <Testimonials/>
+
+        <SiteFooter ctaLabel='Review My Mortgage' blurb="Your Current Mortgage Might Not be Your Best Option.
+        Get a free mortgage review with FundMaster Wealth."  />
       
     </div>
   )
