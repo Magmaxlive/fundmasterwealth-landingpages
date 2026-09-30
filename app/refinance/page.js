@@ -6,6 +6,7 @@ import TrustStrip from '../components/TrustStrip'
 import ClarityCards from '../components/ClarityCards'
 import WhyFundmaster from '../components/WhyFundmaster'
 import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
+import Testimonials from '../components/Testimonials'
 
 const Clarity_cards = [
     {
@@ -143,6 +144,8 @@ function page() {
             sub = 'We understand your situation, explain your options, and help you make confident financial decisions.'
             items={WHY_ITEMS}
             />
+
+        <Testimonials/>
       
     </div>
   )
