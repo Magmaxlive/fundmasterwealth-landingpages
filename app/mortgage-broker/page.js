@@ -4,6 +4,8 @@ import Header from '../components/Header'
 import Hero from '../components/Hero'
 import TrustStrip from '../components/TrustStrip'
 import ClarityCards from '../components/ClarityCards'
+import WhyFundmaster from '../components/WhyFundmaster'
+import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
 
 const Clarity_cards = [
     {
@@ -81,6 +83,7 @@ function page() {
                 }}
                 />
             <TrustStrip/>
+
             <ClarityCards
                 eyebrow="Before You Choose a Broker"
                 heading="What a good broker actually does"
@@ -90,6 +93,8 @@ function page() {
                 ctaLabel="Speak to an Adviser"
                 ctaHref="#check"
             />
+
+           <BorrowingPowerCalculator/>
       
     </div>
   )
