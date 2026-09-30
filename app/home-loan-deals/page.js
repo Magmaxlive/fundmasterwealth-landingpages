@@ -7,6 +7,7 @@ import ClarityCards from '../components/ClarityCards'
 import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
 import WhyFundmaster from '../components/WhyFundmaster'
 import Testimonials from '../components/Testimonials'
+import SiteFooter from '../components/SiteFooter'
 
 const Clarity_cards = [
     {
@@ -143,6 +144,8 @@ function page() {
                 />
 
             <Testimonials/>
+             <SiteFooter ctaLabel='See the Offers' blurb="Before You Sign Up for a Deal, Know What it Actually Costs.
+            Get a free home loan deal comparison with Fundmaster Wealth."  />
     </div>
   )
 }
