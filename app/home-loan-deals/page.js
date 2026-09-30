@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import Hero from '../components/Hero'
 import TrustStrip from '../components/TrustStrip'
 import ClarityCards from '../components/ClarityCards'
+import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
 
 const Clarity_cards = [
     {
@@ -90,6 +91,7 @@ function page() {
                 ctaLabel="Compare Deals"
                 ctaHref="#check"
             />
+            <BorrowingPowerCalculator/>
     </div>
   )
 }
