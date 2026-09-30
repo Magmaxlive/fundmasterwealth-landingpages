@@ -2,6 +2,7 @@ import React from 'react'
 import PageEffects from '../components/PageEffects'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
+import TrustStrip from '../components/TrustStrip'
 
 function page() {
   return (
@@ -29,6 +30,7 @@ function page() {
                 showDeposit: false,
             }}
                 />
+        <TrustStrip/>
       
     </div>
   )
