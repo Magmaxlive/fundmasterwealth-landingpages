@@ -9,6 +9,13 @@ import WhyFundmaster from '../components/WhyFundmaster'
 import Testimonials from '../components/Testimonials'
 import SiteFooter from '../components/SiteFooter'
 
+export const metadata = {
+    title: 'Home Loan Deals Review | FundMaster Wealth',
+    description:
+        "Cash-back, fee waivers and rate discounts look great on paper — but what does the deal actually cost you? Compare current home loan offers across 15+ NZ lenders with a free FundMaster Wealth review.",
+    icons: { icon: '/images/favicon.ico' },
+}
+
 const Clarity_cards = [
     {
         num: '01',

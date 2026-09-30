@@ -9,6 +9,13 @@ import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
 import Testimonials from '../components/Testimonials'
 import SiteFooter from '../components/SiteFooter'
 
+export const metadata = {
+    title: 'Mortgage Refinance Review | FundMaster Wealth',
+    description:
+        "Is your mortgage still the right fit? Get a free refinance review across 15+ NZ lenders — rate, structure and equity, with honest advice even when staying put is the smarter call.",
+    icons: { icon: '/images/favicon.ico' },
+}
+
 const Clarity_cards = [
     {
         num: '01',

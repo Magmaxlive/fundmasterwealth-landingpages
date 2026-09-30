@@ -9,6 +9,13 @@ import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
 import Testimonials from '../components/Testimonials'
 import SiteFooter from '../components/SiteFooter'
 
+export const metadata = {
+    title: 'Mortgage Broker NZ | FundMaster Wealth',
+    description:
+        "Skip the single-bank pitch. Talk to a mortgage broker who compares 15+ NZ lenders, explains the fees and structure, and works for you from first call to settlement.",
+    icons: { icon: '/images/favicon.ico' },
+}
+
 const WHY_ITEMS = [
     {
         title: "Advisers who compare 15+ lenders, not just one bank's products",
