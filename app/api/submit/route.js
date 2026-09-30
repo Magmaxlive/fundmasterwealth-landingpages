@@ -125,7 +125,7 @@ function escapeHtml(v) {
 }
 
 const RESERVED_FIELDS = new Set([
-  'name', 'mobile', 'email',
+  'firstName','lastName', 'mobile', 'email',
   'website', 'fm_hp_field', 'ts', 'source', 'page_url', 'cf-turnstile-response',
 ]);
 
@@ -264,7 +264,9 @@ export async function POST(req) {
     return json(false, 'Malformed request.', 400);
   }
 
-  const name = clean(form.get('name'), 80);
+  const firstName = clean(form.get('firstName'), 80);
+  const lastName = clean(form.get('lastName'), 80);
+  const name = (firstName + ' ' + lastName).trim();
   const mobile = clean(form.get('mobile'), 30);
   const email = clean(form.get('email'), 120);
   const sourceRaw = clean(form.get('source'), 40);
@@ -294,7 +296,7 @@ export async function POST(req) {
   }
 
   /* 3. Payload scan */
-  const hit = payloadSpam([name, mobile, email, ...extras.map((x) => x.value)]);
+  const hit = payloadSpam([firstName,lastName, mobile, email, ...extras.map((x) => x.value)]);
   if (hit) return drop('payload: ' + hit);
 
   /* 4. Turnstile (only if configured) */
@@ -305,7 +307,8 @@ export async function POST(req) {
 
   /* ---------- Validation (real people see these) ---------- */
   const errors = {};
-  if (name.length < 2) errors.name = 'Please enter your name.';
+  if (firstName.length < 2) errors.firstName = 'Please enter your First name.';
+  if (lastName.length < 2) errors.lastName = 'Please enter your Last name.';
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 120) {
     errors.email = 'Please enter a valid email address.';
   }
@@ -353,7 +356,7 @@ export async function POST(req) {
     'IP:         ' + ip,
     'Browser:    ' + userAgent,
     '',
-    'Reply straight to this email to reach ' + name + '.',
+    'Reply straight to this email to reach ' + firstName + '.',
   ].join('\n');
 
   const html = buildLeadHtml({
@@ -394,7 +397,7 @@ export async function POST(req) {
   });
 
   const sheetPromise = postToGoogleScript({
-    name, mobile, email, extras, intent,
+    firstName, lastName, mobile, email, extras, intent,
     submittedAt, source, pageUrl, ip, userAgent,
   });
 
@@ -415,7 +418,8 @@ export async function POST(req) {
 async function postToGoogleScript(lead) {
   if (!GOOGLE_SCRIPT_URL) return;
   const payload = {
-    name: lead.name,
+    firstname: lead.firstName,
+    lastname: lead.lastName,
     mobile: lead.mobile,
     email: lead.email,
     service: lead.source,

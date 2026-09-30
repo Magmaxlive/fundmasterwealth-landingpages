@@ -129,12 +129,13 @@ export default function LeadForm({
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = formRef.current;
-    const name = form.querySelector('[name=name]');
+    const firstName = form.querySelector('[name=firstName]');
+    const lastName = form.querySelector('[name=lastName]');
     const email = form.querySelector('[name=email]');
     const mobile = form.querySelector('[name=mobile]');
 
-    if (!name.value.trim() || !email.value.trim() || !mobile.value.trim()) {
-      [name, email, mobile].forEach((f) => {
+    if (!firstName.value.trim() || !lastName.value.trim() || !email.value.trim() || !mobile.value.trim()) {
+      [firstName,lastName, email, mobile].forEach((f) => {
         f.style.borderColor = f.value.trim() ? '' : '#e05252';
       });
       return;
@@ -147,7 +148,7 @@ export default function LeadForm({
     if (pageUrl) pageUrl.value = location.href;
 
     try {
-      sessionStorage.setItem('fm_lead_name', name.value.trim());
+      sessionStorage.setItem('fm_lead_name', (firstName.value + ' ' + lastName.value).trim());
     } catch {}
 
     window.dataLayer = window.dataLayer || [];
@@ -197,8 +198,13 @@ export default function LeadForm({
         <input type="hidden" name="source" defaultValue={source} />
 
         <div className="field">
-          <label htmlFor={`${source}-name`}>Name</label>
-          <input id={`${source}-name`} name="name" type="text" placeholder="Enter your name" required />
+          <label htmlFor={`${source}-firstName`}>First Name</label>
+          <input id={`${source}-firstName`} name="firstName" type="text" placeholder="Enter your first name" required />
+        </div>
+
+        <div className="field">
+          <label htmlFor={`${source}-lastName`}>Last Name</label>
+          <input id={`${source}-lastName`} name="lastName" type="text" placeholder="Enter your last name" required />
         </div>
 
         <div className="row2">
