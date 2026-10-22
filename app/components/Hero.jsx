@@ -1,4 +1,5 @@
 import { Tick, ArrowRightIcon } from './icons';
+import HeroVideo from './HeroVideo';
 import LeadForm from './LeadForm';
 
 const DEFAULT_INCLUDES = [
@@ -20,12 +21,18 @@ export default function Hero({
   body = 'Get clarity on your borrowing, deposit and home-buying options before you start house hunting.',
   includesTitle = 'Your free first home buyer check includes',
   includes = DEFAULT_INCLUDES,
-  ctaLabel = 'Get My Free First Home Buyer Check',
+  ctaLabel = 'Get My Free Check',
   ctaHref = '#check',
   bgImage = '/images/house-exterior.jpg',
   bgAlt = '',
+  vimeoId,
+  vimeoUrl,
+  videoTitle = 'Intro video',
+  videoAspect = 'vertical',
   form,
 }) {
+  const hasVideo = Boolean(vimeoUrl || vimeoId);
+
   const formProps = {
     source: 'First Home Buyers',
     id: 'check',
@@ -62,7 +69,18 @@ export default function Hero({
           </a>
         </div>
 
-        <LeadForm {...formProps} />
+        {hasVideo ? (
+          <div className="hero__video rv">
+            <HeroVideo
+              vimeoId={vimeoId}
+              vimeoUrl={vimeoUrl}
+              title={videoTitle}
+              aspect={videoAspect}
+            />
+          </div>
+        ) : (
+          <LeadForm {...formProps} />
+        )}
       </div>
     </section>
   );

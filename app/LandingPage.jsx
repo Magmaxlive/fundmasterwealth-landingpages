@@ -1,5 +1,6 @@
 import Header from './components/Header';
 import Hero from './components/Hero';
+import LeadFormSection from './components/LeadFormSection';
 import TrustStrip from './components/TrustStrip';
 import ClarityCards from './components/ClarityCards';
 import BuyingPowerCalculator from './components/BuyingPowerCalculator';
@@ -18,7 +19,13 @@ export default function LandingPage() {
     <>
       <PageEffects />
       <Header />
-      <Hero />
+      <Hero vimeoId="1238336304" />
+      <LeadFormSection
+        eyebrow="Get started"
+        heading="Get your free first home buyer check"
+        sub="Share a few details and a Fundmaster Wealth adviser will be in touch."
+        form={{ source: 'First Home Buyers' }}
+      />
       <TrustStrip />
       <ClarityCards />
       <BuyingPowerCalculator />

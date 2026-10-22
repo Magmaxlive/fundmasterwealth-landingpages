@@ -2,6 +2,7 @@ import React from 'react'
 import PageEffects from '../components/PageEffects'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
+import LeadFormSection from '../components/LeadFormSection'
 import TrustStrip from '../components/TrustStrip'
 import ClarityCards from '../components/ClarityCards'
 import BorrowingPowerCalculator from '../components/BorrowingPowerCalculator'
@@ -120,16 +121,21 @@ function page() {
                 "Find out what you genuinely qualify for"
             ]}
             ctaLabel="See the Offers"
-            form={{
-                source: 'Home Loan Deals',
-                id: 'check',
-                head: 'Compare My Deal',
-                note: 'Takes under a minute. A Fundmaster Wealth adviser will be in touch.',
-                submitLabel: 'Compare My Deal',
-                dataLayerFormName: 'home_loan_deal',
-                showDeposit: false,
-            }}
+            vimeoId=""
             />
+            {/* <LeadFormSection
+                eyebrow="Get started"
+                heading="Compare My Deal"
+                sub="Share a few details and a Fundmaster Wealth adviser will be in touch."
+                form={{
+                    source: 'Home Loan Deals',
+                    head: 'Compare My Deal',
+                    note: 'Takes under a minute. A Fundmaster Wealth adviser will be in touch.',
+                    submitLabel: 'Compare My Deal',
+                    dataLayerFormName: 'home_loan_deal',
+                    showDeposit: false,
+                }}
+            /> */}
             <TrustStrip/>
             <ClarityCards
                 eyebrow="Before You Choose a Lender"
