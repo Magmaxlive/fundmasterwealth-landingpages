@@ -21,7 +21,7 @@ export default function Hero({
   body = 'Get clarity on your borrowing, deposit and home-buying options before you start house hunting.',
   includesTitle = 'Your free first home buyer check includes',
   includes = DEFAULT_INCLUDES,
-  ctaLabel = 'Get My Free First Home Buyer Check',
+  ctaLabel = 'Get My Free Check',
   ctaHref = '#check',
   bgImage = '/images/house-exterior.jpg',
   bgAlt = '',
