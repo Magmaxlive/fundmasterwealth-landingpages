@@ -2,6 +2,7 @@ import React from 'react'
 import PageEffects from '../components/PageEffects'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
+import LeadFormSection from '../components/LeadFormSection'
 import TrustStrip from '../components/TrustStrip'
 import ClarityCards from '../components/ClarityCards'
 import WhyFundmaster from '../components/WhyFundmaster'
@@ -129,16 +130,21 @@ function page() {
           "Get a clear next step, not just a quote"
         ]}
         ctaLabel="Compare My Loan"
-        form={{
-          source: 'Home Loan',
-          id: 'check',
-          head: 'Compare My Loan',
-          note: 'Takes under a minute. A Fundmaster Wealth adviser will be in touch.',
-          submitLabel: 'Compare My Loan',
-          dataLayerFormName: 'home_loan',
-          showDeposit: false,
-        }}
+        vimeoId=""
         />
+        {/* <LeadFormSection
+          eyebrow="Get started"
+          heading="Compare My Loan"
+          sub="Share a few details and a Fundmaster Wealth adviser will be in touch."
+          form={{
+            source: 'Home Loan',
+            head: 'Compare My Loan',
+            note: 'Takes under a minute. A Fundmaster Wealth adviser will be in touch.',
+            submitLabel: 'Compare My Loan',
+            dataLayerFormName: 'home_loan',
+            showDeposit: false,
+          }}
+        /> */}
         <TrustStrip/>
         <ClarityCards
         eyebrow="Before You Choose a Lender"

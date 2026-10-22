@@ -2,6 +2,7 @@ import React from 'react'
 import PageEffects from '../components/PageEffects'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
+import LeadFormSection from '../components/LeadFormSection'
 
 function page() {
   return (
@@ -20,17 +21,22 @@ function page() {
                 "No pressure, no obligation"
             ]}
             ctaLabel="Check Cash-Back Offers"
+            vimeoId=""
+                        />
+        {/* <LeadFormSection
+            eyebrow="Get started"
+            heading="Free Refinance & Cash-Back Review"
+            sub="Share a few details and a Fundmaster Wealth adviser will be in touch."
             form={{
                 source: 'Refinance Cashback Offers',
-                id: 'check',
                 head: 'Free Refinance & Cash-Back Review',
                 note: 'Takes under a minute. A Fundmaster Wealth adviser will be in touch.',
                 submitLabel: 'Check Cash-Back Offers',
                 dataLayerFormName: 'Refinance',
                 showDeposit: false,
             }}
-                        />
-      
+        /> */}
+
     </div>
   )
 }

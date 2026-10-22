@@ -188,6 +188,67 @@ h3{font-size:1.18rem;line-height:1.3;letter-spacing:-.005em}
   font-size:13px;color:var(--slate);margin:14px 0 0;font-weight:500}
 .freeline svg{width:14px;height:14px;stroke:var(--pavo-green);stroke-width:2.4;fill:none}
 
+/* ---------- Hero video embed ---------- */
+.hero__video{width:100%;display:flex;justify-content:center}
+.video-embed{
+  position:relative;width:100%;aspect-ratio:16/9;
+  border-radius:var(--r-lg);overflow:hidden;
+  background:#000;box-shadow:0 40px 90px -40px rgba(2,10,26,.85);
+  border:1px solid rgba(255,255,255,.1);
+}
+.video-embed--vertical{aspect-ratio:9/16;max-width:360px;margin:0 auto}
+.video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+
+/* Custom player controls */
+.video-ctrl{
+  position:absolute;z-index:2;appearance:none;border:0;cursor:pointer;
+  color:#fff;background:transparent;padding:0;line-height:0;
+  transition:opacity .25s var(--ease), transform .25s var(--ease), background .25s;
+}
+.video-ctrl:focus-visible{outline:2px solid #fff;outline-offset:3px;border-radius:999px}
+
+.video-ctrl--toggle{
+  inset:0;width:100%;height:100%;display:grid;place-items:center;
+  background:linear-gradient(180deg,rgba(4,12,28,.08),rgba(4,12,28,.22));
+}
+.video-ctrl--toggle.is-playing{background:transparent}
+.video-ctrl--toggle.is-playing .video-ctrl__icon{opacity:0;transform:scale(.9)}
+.video-ctrl--toggle.is-playing:hover .video-ctrl__icon,
+.video-ctrl--toggle.is-playing:focus-visible .video-ctrl__icon{opacity:1;transform:scale(1)}
+
+.video-ctrl__icon{
+  width:72px;height:72px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(255,255,255,.92);color:var(--navy);
+  box-shadow:0 18px 40px -16px rgba(2,10,26,.65), 0 0 0 1px rgba(255,255,255,.4) inset;
+  transition:opacity .25s var(--ease), transform .25s var(--ease), background .25s;
+}
+.video-ctrl--toggle:hover .video-ctrl__icon{background:#fff;transform:scale(1.06)}
+.video-ctrl__icon svg{width:30px;height:30px;fill:currentColor}
+
+.video-ctrl--mute{
+  right:14px;bottom:14px;width:40px;height:40px;border-radius:50%;
+  background:rgba(10,20,40,.55);backdrop-filter:blur(6px);
+  display:grid;place-items:center;
+  box-shadow:0 6px 18px -8px rgba(0,0,0,.55);
+}
+.video-ctrl--mute:hover{background:rgba(10,20,40,.78)}
+.video-ctrl--mute svg{width:20px;height:20px;fill:currentColor}
+
+@media(max-width:680px){
+  .video-ctrl__icon{width:60px;height:60px}
+  .video-ctrl__icon svg{width:26px;height:26px}
+}
+
+/* ---------- Lead form section (below hero) ---------- */
+.lead-section__grid{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;
+}
+.lead-section__intro h2{color:var(--navy);margin:0 0 14px}
+.lead-section__intro .lede{margin:0;color:var(--slate);max-width:52ch}
+@media(max-width:900px){
+  .lead-section__grid{grid-template-columns:1fr;gap:36px}
+}
+
 /* ---------- Trust strip ---------- */
 .strip{background:var(--paper-2);border-block:1px solid var(--line);padding:26px 0}
 .strip__in{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px 46px}

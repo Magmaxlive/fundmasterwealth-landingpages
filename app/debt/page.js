@@ -3,6 +3,7 @@ import ClarityCards from '../components/ClarityCards';
 import DepositPathways from '../components/DepositPathways';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
+import LeadFormSection from '../components/LeadFormSection';
 import MortgageReady from '../components/MortgageReady';
 import PageEffects from '../components/PageEffects';
 import SiteFooter from '../components/SiteFooter';
@@ -254,9 +255,14 @@ export default function DebtPage() {
           'Clear next steps',
         ]}
         ctaLabel="Get My Free Debt Review"
+        vimeoId=""
+      />
+      {/* <LeadFormSection
+        eyebrow="Get started"
+        heading="Get your free debt check"
+        sub="Share a few details and a Fundmaster Wealth adviser will be in touch."
         form={{
           source: 'Debt',
-          id: 'check',
           head: 'Get your free debt check',
           note: 'Takes under a minute. A Fundmaster Wealth adviser will be in touch.',
           submitLabel: 'Get My Free Debt Review',
@@ -293,7 +299,7 @@ export default function DebtPage() {
             },
           ],
         }}
-      />
+      /> */}
       <TrustStrip />
       <ClarityCards
         eyebrow="Where most people get stuck"
